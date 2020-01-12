@@ -5,6 +5,7 @@ function selectR(checkBox, value) {
     }
     checkBox.checked = true;
     document.getElementById("form:r").value = value;
+    remoteFunction();
     redraw();
 
 }
@@ -28,32 +29,31 @@ function listener(e) {
 }
 
 function onloadfunc() {
-/*    let val = document.getElementById("oldR").innerText;
+    let r = document.getElementById("form:r").value;
     let id;
-    switch (val) {
-        case 1:
+    switch (r) {
+        case "1":
             id = "one";
             break;
-        case 2:
+        case "2":
             id = "two";
             break;
-        case 3:
+        case "3":
             id = "three";
             break;
-        case 4:
+        case "4":
             id = "four";
             break;
-        case 5:
+        case "5":
             id = "five";
             break;
         default:
             id = "one";
-            val = "1";
+            r = "1";
             break;
     }
-    console.log("id:" + id);
-    console.log("val:" + val);*/
-    selectR(document.getElementById('form:one'), 1);
+
+    selectR(document.getElementById('form:'+id), r);
 }
 
 function toCanvas(point){

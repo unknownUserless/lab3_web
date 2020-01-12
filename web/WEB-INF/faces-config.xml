@@ -4,30 +4,6 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
     http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
-    <navigation-rule>
-        <from-view-id>/index.xhtml</from-view-id>
-        <navigation-case>
-            <description>Redirecting to home page</description>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/main.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/main.xhtml</from-view-id>
-        <navigation-case>
-            <description>Redirecting to index page</description>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/error.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>main</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
-
     <managed-bean>
         <managed-bean-name>helloBean</managed-bean-name>
         <managed-bean-class>test.HelloBean</managed-bean-class>
@@ -75,6 +51,11 @@
             <value>#{formPoint}</value>
         </managed-property>
 
+        <managed-property>
+            <property-name>r</property-name>
+            <value>1</value>
+        </managed-property>
+
 
     </managed-bean>
 
@@ -82,5 +63,27 @@
         <validator-id>validator</validator-id>
         <validator-class>lab3.Validator</validator-class>
     </validator>
+
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/main.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/main.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/error.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 
 </faces-config>

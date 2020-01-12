@@ -63,7 +63,7 @@
         </table>
 
 
-        <h:form id="form"><!-- onsubmit="return false;"-->
+        <h:form id="form">
 
             <table id="input">
                 <caption> Координаты точки и радиус</caption>
@@ -105,6 +105,7 @@
                     <td>R</td>
                     <td>
                         <h:inputHidden id="r" value="#{checker.r}"/>
+                        <p:remoteCommand name="remoteFunction" process="r"/>
 
                         <h:outputLabel value="1" for="one"/>
                         <h:selectBooleanCheckbox id="one" class="r-box" onclick="selectR(this, 1)"/>
@@ -126,10 +127,11 @@
             </table>
 
             <p:commandButton id="submitButton" action="#{checker.addFormCheck}"
-                             value="Проверить" update="historyTable json msg"
+                             value="Проверить" update="historyTable json"
                               oncomplete="redraw()" process="form"/>
 
         </h:form>
+
 
         <h:form id="canvas">
 
