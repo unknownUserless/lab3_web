@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+    http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <description>Redirecting to home page</description>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/main.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/main.xhtml</from-view-id>
+        <navigation-case>
+            <description>Redirecting to index page</description>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/error.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>main</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <managed-bean>
+        <managed-bean-name>helloBean</managed-bean-name>
+        <managed-bean-class>test.HelloBean</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>navigator</managed-bean-name>
+        <managed-bean-class>lab3.Navigator</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>canvasPoint</managed-bean-name>
+        <managed-bean-class>lab3.model.points.Point</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>formPoint</managed-bean-name>
+        <managed-bean-class>lab3.model.points.Point</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+
+        <managed-property>
+            <property-name>x</property-name>
+            <value>0</value>
+        </managed-property>
+
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>checker</managed-bean-name>
+        <managed-bean-class>lab3.model.Checker</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+
+        <managed-property>
+            <property-name>canvasPoint</property-name>
+            <property-class>lab3.model.points.Point</property-class>
+            <value>#{canvasPoint}</value>
+        </managed-property>
+
+        <managed-property>
+            <property-name>formPoint</property-name>
+            <property-class>lab3.model.points.Point</property-class>
+            <value>#{formPoint}</value>
+        </managed-property>
+
+
+    </managed-bean>
+
+    <validator>
+        <validator-id>validator</validator-id>
+        <validator-class>lab3.Validator</validator-class>
+    </validator>
+
+</faces-config>

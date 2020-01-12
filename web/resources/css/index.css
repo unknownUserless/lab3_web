@@ -1,0 +1,21 @@
+#header {
+  text-align: center;
+  color: black;
+  font-size: 25pt;
+  font-family: Luminari, fantasy;
+}
+
+#clock {
+  margin: 0 auto;
+  border: 1px solid black;
+  background: lightgrey;
+  font-size: 15pt;
+  width: 400px;
+}
+
+.link {
+  font-size: 15pt;
+  color: black;
+}
+
+/*# sourceMappingURL=index.css.map */

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <h:head>
+        <h:outputScript name="js/functions.js"/>
+        <h:outputScript name="js/canvas.js"/>
+
+        <h:outputStylesheet library="css" name="main.css"/>
+        <h:outputStylesheet library="css" name="common.css"/>
+    </h:head>
+
+    <h:body onload="onloadfunc()">
+
+        <h3>Main Page</h3>
+        <table>
+            <tr>
+                <td class="canv">
+                    <canvas id="canvas" width="320px" height="320px" style="background: white;"></canvas>
+                    <script type="text/javascript">
+
+                        const width=320;
+                        const height=320;
+                        const padding=20;
+
+                        const canvas = document.getElementById("canvas");
+                        const ctx = canvas.getContext('2d');
+                        canvas.addEventListener("click", listener);
+
+                    </script>
+                </td>
+
+                <td class="hist">
+                    <div id="history">
+
+                        <p:dataTable id="historyTable" var="check" value="#{checker.list}">
+
+                            <p:column headerText="X">
+                                <h:outputText value="#{check.x}"/>
+                            </p:column>
+
+                            <p:column headerText="Y">
+                                <h:outputText value="#{check.y}"/>
+                            </p:column>
+
+                            <p:column headerText="R">
+                                <h:outputText value="#{check.r}"/>
+                            </p:column>
+
+                            <p:column headerText="Попадание">
+                                <h:outputText value="#{check.hit}"/>
+                            </p:column>
+                        </p:dataTable>
+
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+
+        <h:form id="form"><!-- onsubmit="return false;"-->
+
+            <table id="input">
+                <caption> Координаты точки и радиус</caption>
+                <colgroup>
+                    <col class="left"/>
+                    <col class="right"/>
+                </colgroup>
+
+                <tr>
+                    <td>X</td>
+                    <td>
+                        <h:inputText id="x" required="true" autocomplete="false" requiredMessage="Это поле обязательно"
+                                     maxlength="7" value="#{checker.formPoint.x}" validator="validator">
+                                <p:ajax update="msg" event="keyup"/>
+                        </h:inputText>
+                        <h:message for="x" id="msg" style="color: red; font-size: 15px; margin-left: 2%"/>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Y</td>
+                    <td>
+
+                        <h:selectOneMenu id="y" value="#{checker.formPoint.y}">
+                            <f:selectItem itemValue="-5" itemLabel="-5"/>
+                            <f:selectItem itemValue="-4" itemLabel="-4"/>
+                            <f:selectItem itemValue="-3" itemLabel="-3"/>
+                            <f:selectItem itemValue="-2" itemLabel="-2"/>
+                            <f:selectItem itemValue="-1" itemLabel="-1"/>
+                            <f:selectItem itemValue="0" itemLabel="0"/>
+                            <f:selectItem itemValue="1" itemLabel="1"/>
+                            <f:selectItem itemValue="2" itemLabel="2"/>
+                            <f:selectItem itemValue="3" itemLabel="3"/>
+                        </h:selectOneMenu>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>R</td>
+                    <td>
+                        <h:inputHidden id="r" value="#{checker.r}"/>
+
+                        <h:outputLabel value="1" for="one"/>
+                        <h:selectBooleanCheckbox id="one" class="r-box" onclick="selectR(this, 1)"/>
+
+                        <h:outputLabel value="2" for="two"/>
+                        <h:selectBooleanCheckbox id="two" class="r-box" onclick="selectR(this, 2)"/>
+
+                        <h:outputLabel value="3" for="three"/>
+                        <h:selectBooleanCheckbox id="three" class="r-box" onclick="selectR(this, 3)"/>
+
+                        <h:outputLabel value="4" for="four"/>
+                        <h:selectBooleanCheckbox id="four" class="r-box" onclick="selectR(this, 4)"/>
+
+                        <h:outputLabel value="5" for="five"/>
+                        <h:selectBooleanCheckbox id="five" class="r-box" onclick="selectR(this, 5)"/>
+                    </td>
+                </tr>
+
+            </table>
+
+            <p:commandButton id="submitButton" action="#{checker.addFormCheck}"
+                             value="Проверить" update="historyTable json msg"
+                              oncomplete="redraw()" process="form"/>
+
+        </h:form>
+
+        <h:form id="canvas">
+
+            <h:inputHidden id="x-value" value="#{checker.canvasPoint.x}"/>
+            <h:inputHidden id="y-value" value="#{checker.canvasPoint.y}"/>
+            <h:inputHidden id="r-value" value="#{checker.r}"/>
+
+            <p:commandButton id="canvasButton" action="#{checker.addCanvasCheck}"
+                             update="historyTable json"
+                             style="display: none" oncomplete="redraw()"/>
+
+        </h:form>
+
+        <h:outputText id="json" value="#{checker.json}" style="display: none"/>
+
+
+        <h:link class="link" value="Назад" outcome="#{navigator.doAction()}"/>
+
+    </h:body>
+</f:view>
+</html>
