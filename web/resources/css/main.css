@@ -31,4 +31,8 @@ table#input caption {
   width: 40%;
 }
 
+#canvas {
+  cursor: Crosshair;
+}
+
 /*# sourceMappingURL=main.css.map */
