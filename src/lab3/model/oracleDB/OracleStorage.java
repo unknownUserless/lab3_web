@@ -32,7 +32,7 @@ public class OracleStorage extends JDBCDatabase implements Storage {
 
     @Override
     protected String password() {
-        return "sms970";
+        return "******";
     }
 
     @Override
