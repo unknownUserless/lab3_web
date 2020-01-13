@@ -5,7 +5,7 @@ function selectR(checkBox, value) {
     }
     checkBox.checked = true;
     document.getElementById("form:r").value = value;
-    remoteFunction();
+    /*remoteFunction();*/
     redraw();
 
 }
